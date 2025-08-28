@@ -1,48 +1,25 @@
-
 import { Facebook, Instagram, Twitter, Mail, Phone } from 'lucide-react';
 import { BsWhatsapp } from "react-icons/bs";
-
 const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white">
+  return <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Gallery Info */}
           <div className="md:col-span-2 space-y-4">
             <h3 className="font-playfair text-xl font-semibold text-white">Simone Oliveira Art Gallery</h3>
             <p className="text-gray-300 text-sm leading-relaxed max-w-md">
-              Arte contemporânea de qualidade excepcional. Descobra obras únicas que tocam a alma 
-              e despertam emoções profundas através da expressão artística autêntica.
-            </p>
+          </p>
             <div className="flex space-x-4 pt-2">
-              <a 
-                href="#" 
-                className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300"
-                aria-label="Facebook"
-              >
+              <a href="#" className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300" aria-label="Facebook">
                 <Facebook size={20} />
               </a>
-              <a 
-                href="#" 
-                className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300"
-                aria-label="Instagram"
-              >
+              <a href="#" className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a 
-                href="#" 
-                className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300"
-                aria-label="Twitter"
-              >
+              <a href="#" className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300" aria-label="Twitter">
                 <Twitter size={20} />
               </a>
-              <a 
-                href="https://wa.me/5534991101000"
-                className="text-gray-400 hover:text-green-500 transition-colors duration-300"
-                aria-label="WhatsApp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://wa.me/5534991101000" className="text-gray-400 hover:text-green-500 transition-colors duration-300" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
                 <BsWhatsapp size={20} />
               </a>
             </div>
@@ -73,8 +50,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
