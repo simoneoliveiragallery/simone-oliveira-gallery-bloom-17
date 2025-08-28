@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
-import { useArtworksMetadata, useFeaturedArtworksMetadata, useArtwork, ArtworkMetadata } from '../hooks/useArtworks';
+import { useArtworks, useFeaturedArtworks, useArtwork } from '../hooks/useArtworks';
 import { useIsMobile } from '../hooks/use-mobile';
 import ArtworkModal from './ArtworkModal';
-import LazyArtworkImage from './LazyArtworkImage';
+import OptimizedArtworkImage from './OptimizedArtworkImage';
 
 interface ArtworkGridProps {
   collectionId?: string | null;
@@ -11,11 +11,11 @@ interface ArtworkGridProps {
 }
 
 const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) => {
-  const { data: allArtworks, isLoading: allLoading, error: allError } = useArtworksMetadata(collectionId);
-  const { data: featuredArtworks, isLoading: featuredLoading, error: featuredError } = useFeaturedArtworksMetadata();
+  const { data: allArtworks, isLoading: allLoading, error: allError } = useArtworks(collectionId);
+  const { data: featuredArtworks, isLoading: featuredLoading, error: featuredError } = useFeaturedArtworks();
   const isMobile = useIsMobile();
   const [selectedArtworkId, setSelectedArtworkId] = useState<string | null>(null);
-  const { data: selectedArtwork } = useArtwork(selectedArtworkId || '');
+  const selectedArtwork = selectedArtworkId ? (featuredOnly ? featuredArtworks : allArtworks)?.find(art => art.id === selectedArtworkId) : null;
 
   const artworks = featuredOnly ? featuredArtworks : allArtworks;
   const isLoading = featuredOnly ? featuredLoading : allLoading;
@@ -62,8 +62,8 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
             onClick={() => setSelectedArtworkId(artwork.id)}
           >
             <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige">
-              <LazyArtworkImage
-                artworkId={artwork.id}
+              <OptimizedArtworkImage
+                imageUrl={artwork.image}
                 title={artwork.title}
                 className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-110"
               />
