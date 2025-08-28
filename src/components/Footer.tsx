@@ -8,7 +8,8 @@ const Footer = () => {
           <div className="md:col-span-2 space-y-4">
             <h3 className="font-playfair text-xl font-semibold text-white">Simone Oliveira Art Gallery</h3>
             <p className="text-gray-300 text-sm leading-relaxed max-w-md">
-          </p>
+              Arte contemporânea, descubra obras únicas que tocam a alma através da expressão artística autêntica.
+            </p>
             <div className="flex space-x-4 pt-2">
               <a href="#" className="text-gray-400 hover:text-warm-terracotta transition-colors duration-300" aria-label="Facebook">
                 <Facebook size={20} />
