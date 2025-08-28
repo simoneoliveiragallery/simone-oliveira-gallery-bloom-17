@@ -438,8 +438,13 @@
     
     .text-xs {
       font-size: 0.9rem !important;
-    }
   }
+}
+
+/* Hover effects */
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
+}
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {

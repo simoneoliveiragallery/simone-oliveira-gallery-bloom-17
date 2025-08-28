@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useArtworks, Artwork } from '../hooks/useArtworks';
 import { useIsMobile } from '../hooks/use-mobile';
 import ArtworkModal from './ArtworkModal';
+import ArtworkSkeleton from './ArtworkSkeleton';
+import OptimizedArtworkImage from './OptimizedArtworkImage';
 
 interface ArtworkGridProps {
   collectionId?: string | null;
@@ -23,8 +25,14 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 justify-items-center">
-        {[...Array(8)].map((_, i) => (
-          <div key={i} className="w-full h-64 bg-gentle-green/10 rounded-xl animate-pulse" />
+        {[...Array(12)].map((_, i) => (
+          <div 
+            key={i} 
+            className="w-full animate-fade-in"
+            style={{ animationDelay: `${i * 0.1}s` }}
+          >
+            <ArtworkSkeleton />
+          </div>
         ))}
       </div>
     );
@@ -54,19 +62,18 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
         {artworks?.map((artwork, index) => (
           <div
             key={artwork.id}
-            className="group cursor-pointer stagger-animation hover-lift-elegant"
+            className="group cursor-pointer hover-scale animate-fade-in"
             style={{
-              animationDelay: `${index * 0.1}s`
+              animationDelay: `${index * 0.05}s`
             }}
             onClick={() => setSelectedArtwork(artwork)}
           >
-            <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige">
+            <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige transition-shadow duration-300 hover:shadow-lg">
               {artwork.image ? (
-                <img
+                <OptimizedArtworkImage
                   src={artwork.image}
                   alt={`${artwork.title} - ${artwork.artist} (${artwork.year})`}
-                  className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
+                  className="transition-transform duration-700 group-hover:scale-110"
                 />
               ) : (
                 <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
@@ -75,8 +82,8 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
                   </span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-deep-black/80 via-deep-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-deep-black/80 via-deep-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 className="font-semplicita text-lg sm:text-xl text-soft-beige mb-2 font-light">
                     {artwork.title}
                   </h3>

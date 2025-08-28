@@ -52,14 +52,13 @@ export const useArtworks = (collectionId?: string | null) => {
       }
       
       console.log('✅ Loaded artworks from database - Total:', data?.length);
-      data?.forEach((artwork, index) => {
-        console.log(`${index + 1}. "${artwork.title}" by ${artwork.artist} (${artwork.year})`);
-      });
       
       return data as Artwork[];
     },
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
