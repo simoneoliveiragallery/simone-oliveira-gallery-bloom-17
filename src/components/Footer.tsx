@@ -47,7 +47,16 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-8 pt-6 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; 2025 Simone Oliveira Art Gallery. Todos os direitos reservados.
+            © 2025 Desenvolvido por{' '}
+            <a 
+              href="https://www.amplie-marketing.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-warm-terracotta transition-colors"
+            >
+              Amplie Marketing
+            </a>
+            . Todos os direitos reservados.
           </p>
         </div>
       </div>
