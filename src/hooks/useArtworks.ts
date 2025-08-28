@@ -1,6 +1,5 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { useEffect } from 'react';
 
 export interface Artwork {
   id: string;
@@ -31,173 +30,8 @@ export interface ArtworkMetadata {
   updated_at: string;
 }
 
-// Hook para buscar metadados das obras (sem imagens) com real-time updates
-export const useArtworksMetadata = (collectionId?: string | null) => {
-  const queryClient = useQueryClient();
-
-  // Setup real-time listener para mudanças nas obras
-  useEffect(() => {
-    const channel = supabase
-      .channel('artworks-metadata-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*', // Escutar INSERT, UPDATE, DELETE
-          schema: 'public',
-          table: 'artworks'
-        },
-        (payload) => {
-          console.log('Real-time artworks change:', payload);
-          // Invalidar todas as queries de artworks para garantir sincronização
-          queryClient.invalidateQueries({ queryKey: ['artworks-metadata'] });
-          queryClient.invalidateQueries({ queryKey: ['artworks'] });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [queryClient]);
-
-  return useQuery({
-    queryKey: ['artworks-metadata', collectionId],
-    queryFn: async () => {
-      let query = supabase
-        .from('artworks')
-        .select('id, title, artist, year, medium, description, dimensions, collection_id, featured, created_at, updated_at')
-        .order('created_at', { ascending: false });
-      
-      if (collectionId) {
-        query = query.eq('collection_id', collectionId);
-      }
-      
-      const { data, error } = await query;
-      
-      if (error) {
-        console.error('Error fetching artworks metadata:', error);
-        throw error;
-      }
-      
-      console.log('Fetched artworks metadata - Total:', data?.length);
-      return data as ArtworkMetadata[];
-    },
-    staleTime: 2 * 60 * 1000, // 2 minutes
-    refetchOnWindowFocus: true,
-  });
-};
-
-// Hook para buscar uma obra específica com imagem (otimizado com cache individual)
-export const useArtworkImage = (artworkId: string) => {
-  const queryClient = useQueryClient();
-
-  // Setup real-time listener para esta obra específica
-  useEffect(() => {
-    if (!artworkId) return;
-
-    const channel = supabase
-      .channel(`artwork-${artworkId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'artworks',
-          filter: `id=eq.${artworkId}`
-        },
-        (payload) => {
-          console.log(`Real-time update for artwork ${artworkId}:`, payload.new);
-          // Invalidar cache desta obra específica
-          queryClient.invalidateQueries({ queryKey: ['artwork-image', artworkId] });
-          queryClient.invalidateQueries({ queryKey: ['artwork', artworkId] });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [artworkId, queryClient]);
-
-  return useQuery({
-    queryKey: ['artwork-image', artworkId],
-    queryFn: async () => {
-      if (!artworkId) return null;
-      
-      console.log('Fetching image for artwork ID:', artworkId);
-      
-      const { data, error } = await supabase
-        .from('artworks')
-        .select('image, title')
-        .eq('id', artworkId)
-        .single();
-      
-      if (error) {
-        console.error('Error fetching artwork image:', error);
-        throw error;
-      }
-      
-      console.log(`Fetched image for ${data.title} (${artworkId}):`, data.image ? 'Success' : 'No image');
-      return data.image;
-    },
-    enabled: !!artworkId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 30 * 60 * 1000, // 30 minutes
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    retry: 2,
-    retryDelay: 1000,
-  });
-};
-
-// Hook para buscar uma obra completa
-export const useArtwork = (artworkId: string) => {
-  return useQuery({
-    queryKey: ['artwork', artworkId],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('artworks')
-        .select('*')
-        .eq('id', artworkId)
-        .single();
-      
-      if (error) {
-        console.error('Error fetching artwork:', error);
-        throw error;
-      }
-      
-      return data as Artwork;
-    },
-    enabled: !!artworkId,
-  });
-};
-
+// Hook para buscar todas as obras diretamente do banco
 export const useArtworks = (collectionId?: string | null) => {
-  const queryClient = useQueryClient();
-
-  // Setup real-time listener 
-  useEffect(() => {
-    const channel = supabase
-      .channel('artworks-full-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public', 
-          table: 'artworks'
-        },
-        (payload) => {
-          console.log('Real-time artworks full change:', payload);
-          queryClient.invalidateQueries({ queryKey: ['artworks'] });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [queryClient]);
-
   return useQuery({
     queryKey: ['artworks', collectionId],
     queryFn: async () => {
@@ -217,51 +51,97 @@ export const useArtworks = (collectionId?: string | null) => {
         throw error;
       }
       
-      console.log('Fetched full artworks - Total:', data?.length);
+      console.log('✅ Loaded artworks from database - Total:', data?.length);
+      data?.forEach((artwork, index) => {
+        console.log(`${index + 1}. "${artwork.title}" by ${artwork.artist} (${artwork.year})`);
+      });
+      
       return data as Artwork[];
     },
-    staleTime: 2 * 60 * 1000,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
 
-export const useFeaturedArtworksMetadata = () => {
-  return useQuery({
-    queryKey: ['artworks-metadata', 'featured'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('artworks')
-        .select('id, title, artist, year, medium, description, dimensions, collection_id, featured, created_at, updated_at')
-        .eq('featured', true)
-        .order('created_at', { ascending: false });
-      
-      if (error) {
-        console.error('Error fetching featured artworks metadata:', error);
-        throw error;
-      }
-      
-      console.log('Fetched featured artworks metadata:', data?.map(a => ({ id: a.id, title: a.title })));
-      return data as ArtworkMetadata[];
-    },
-  });
+// Hook para buscar metadados das obras (compatibilidade)
+export const useArtworksMetadata = (collectionId?: string | null) => {
+  const { data: artworks, ...rest } = useArtworks(collectionId);
+  
+  const metadata = artworks?.map(artwork => ({
+    id: artwork.id,
+    title: artwork.title,
+    artist: artwork.artist,
+    year: artwork.year,
+    medium: artwork.medium,
+    description: artwork.description,
+    dimensions: artwork.dimensions,
+    collection_id: artwork.collection_id,
+    featured: artwork.featured,
+    created_at: artwork.created_at,
+    updated_at: artwork.updated_at,
+  })) as ArtworkMetadata[];
+
+  return {
+    data: metadata,
+    ...rest
+  };
 };
 
-export const useFeaturedArtworks = () => {
+// Hook para buscar uma obra completa
+export const useArtwork = (artworkId: string) => {
   return useQuery({
-    queryKey: ['artworks', 'featured'],
+    queryKey: ['artwork', artworkId],
     queryFn: async () => {
+      if (!artworkId) return null;
+      
       const { data, error } = await supabase
         .from('artworks')
         .select('*')
-        .eq('featured', true)
-        .order('created_at', { ascending: false });
+        .eq('id', artworkId)
+        .single();
       
       if (error) {
-        console.error('Error fetching featured artworks:', error);
+        console.error('Error fetching artwork:', error);
         throw error;
       }
       
-      return data as Artwork[];
+      return data as Artwork;
     },
+    enabled: !!artworkId,
   });
 };
+
+// Hook para obras em destaque (compatibilidade)
+export const useFeaturedArtworksMetadata = () => {
+  const { data: artworks, ...rest } = useArtworks();
+  
+  const featuredMetadata = artworks?.filter(artwork => artwork.featured).map(artwork => ({
+    id: artwork.id,
+    title: artwork.title,
+    artist: artwork.artist,
+    year: artwork.year,
+    medium: artwork.medium,
+    description: artwork.description,
+    dimensions: artwork.dimensions,
+    collection_id: artwork.collection_id,
+    featured: artwork.featured,
+    created_at: artwork.created_at,
+    updated_at: artwork.updated_at,
+  })) as ArtworkMetadata[];
+
+  return {
+    data: featuredMetadata,
+    ...rest
+  };
+};
+
+export const useFeaturedArtworks = () => {
+  const { data: artworks, ...rest } = useArtworks();
+  const featuredArtworks = artworks?.filter(artwork => artwork.featured);
+  
+  return {
+    data: featuredArtworks,
+    ...rest
+  };
+};
+
