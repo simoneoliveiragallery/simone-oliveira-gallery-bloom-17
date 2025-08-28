@@ -10,7 +10,7 @@ const StudioSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
           <div className="bg-gentle-green/20 rounded-2xl p-4 shadow-lg hover-lift-elegant">
             <img src="/lovable-uploads/e06b8e32-b139-4ac9-9789-dd2d68767dca.png" alt="Simone Oliveira pintando em seu ateliê" className="w-auto h-auto max-h-48 sm:max-h-64 object-contain rounded-xl" />
           </div>
