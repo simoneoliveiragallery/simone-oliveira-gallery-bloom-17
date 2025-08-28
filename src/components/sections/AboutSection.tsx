@@ -17,9 +17,8 @@ const AboutSection = () => {
             </h2>
 
             <p className="font-helvetica text-sm sm:text-base text-deep-black/80 leading-relaxed mb-3 sm:mb-4 font-light justified-text">
-              Simone Oliveira é uma <strong>artista plástica brasileira</strong> especializada em 
-              <strong>arte contemporânea</strong> que dedica sua vida à criação de 
-              <strong>obras abstratas únicas</strong> que desafiam convenções e exploram as profundezas da experiência humana.
+              Simone é uma <strong>artista plástica brasileira</strong> em 
+              <strong>arte contemporânea</strong> de <strong>obras abstratas únicas</strong> que exploram as profundezas da dedicação a arte, não à pintura.
             </p>
 
             <p className="font-helvetica text-sm sm:text-base text-deep-black/80 leading-relaxed mb-6 sm:mb-8 font-light justified-text">
