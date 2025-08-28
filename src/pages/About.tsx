@@ -22,15 +22,15 @@ const About = () => {
   const galleryFeatures = [{
     icon: Target,
     title: "Nosso Objetivo",
-    description: "Criar uma plataforma online elegante que sirva como vitrine oficial para as obras da artista, possibilitando o contato direto para negociações personalizadas e fortalecendo o vínculo humano por trás de cada peça."
+    description: "Promover a apreciação da arte e tornar obras acessíveis ao público em um espaço de inspiração e cultura."
   }, {
     icon: Globe,
     title: "Nossa Missão",
-    description: "Oferecer uma experiência estética imersiva através de obras que transitam entre o abstrato e o impressionismo, refletindo a alma, as paisagens internas e os elementos naturais do Brasil."
+    description: "Experiência estética imersiva através de obras que transitam entre o abstrato e o impressionismo, refletindo a alma, as paisagens internas e os elementos naturais do Brasil."
   }, {
     icon: Palette,
     title: "Nossa Visão",
-    description: "Ser reconhecida como um espaço de contemplação e conexão emocional, onde cada obra dialoga com quem observa por meio de cores, texturas e significados únicos."
+    description: "Contemplação e conexão emocional, onde cada obra dialoga com quem observa por meio de cores, texturas e significados únicos."
   }];
   const websiteStructure = [{
     icon: "🏠",
