@@ -12,7 +12,7 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
   const [imageLoaded, setImageLoaded] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
   
-  const { data: imageUrl, isLoading } = useArtworkImage(isInView ? artworkId : '');
+  const { data: imageUrl, isLoading, error } = useArtworkImage(isInView ? artworkId : '');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -22,7 +22,7 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1, rootMargin: '200px' }
     );
 
     if (imgRef.current) {
@@ -35,9 +35,15 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
       {!isInView || isLoading ? (
-        <div className="w-full h-full bg-gentle-green/10 animate-pulse flex items-center justify-center">
+        <div className="w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
             Carregando...
+          </div>
+        </div>
+      ) : error ? (
+        <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
+          <div className="text-deep-black/50 font-helvetica text-sm">
+            Erro ao carregar
           </div>
         </div>
       ) : imageUrl ? (
@@ -51,9 +57,9 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
           onLoad={() => setImageLoaded(true)}
         />
       ) : (
-        <div className="w-full h-full bg-gentle-green/10 flex items-center justify-center">
+        <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
-            Erro ao carregar
+            Imagem não encontrada
           </div>
         </div>
       )}
