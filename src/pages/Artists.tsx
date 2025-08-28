@@ -100,7 +100,7 @@ const Artists = () => {
           <h2 className="font-semplicita text-4xl font-light text-deep-black mb-6">
             Processo Criativo
           </h2>
-          <p className="font-helvetica text-lg text-deep-black/80 max-w-2xl mx-auto justified-text text-center">O processo criativo da artista plástica Simone Oliveira é fundamentado em três pilares essenciais que orientam cada obra, a união desses pilares confere às suas criações uma identidade única, sensível e conectada com o observador.</p>
+          <p className="font-helvetica text-lg text-deep-black/80 max-w-2xl mx-auto justified-text text-center">O processo criativo da artista plástica Simone é fundamentado em três pilares essenciais que orientam cada obra, que confere às suas criações uma identidade única, sensível e conectada com o observador.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
