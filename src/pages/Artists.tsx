@@ -62,11 +62,11 @@ const Artists = () => {
               </p>
 
               <div className="space-y-4 text-deep-black/80 leading-relaxed">
-                <p className="font-helvetica justified-text">Nascida em Minas Gerais, Simone Oliveira desenvolveu sua paixão pela arte desde muito jovem. Especialização em Artes Visuais pela Universidade de São Paulo, dedicou à exploração de técnicas mistas que combinam tradição e inovação contemporânea.</p>
+                <p className="font-helvetica justified-text">Nascida em Minas Gerais, Simone Oliveira desenvolvi minha paixão pela arte desde muito jovem. Especializada em Artes Visuais pela Universidade de São Paulo, me dediquei à exploração de técnicas mistas que combinam tradição e inovação contemporânea.</p>
 
-                <p className="font-helvetica justified-text">Suas obras refletem uma conexão, explorando emoção, identidade e transformação pessoal através de uma linguagem visual única que mescla cores vibrantes com formas expressivas e texturas envolventes.</p>
+                <p className="font-helvetica justified-text">Minhas obras refletem uma conexão, explorando emoção, identidade e transformação pessoal através de uma linguagem visual única que mescla cores vibrantes com formas expressivas e texturas envolventes.</p>
 
-                <p className="font-helvetica justified-text">Com mais de 8 coleções temáticas criadas e obras em coleções privadas por todo o Brasil, Simone continua a expandir os limites de sua expressão artística, sempre buscando novas formas de conectar-se com seu público através da arte.</p>
+                <p className="font-helvetica justified-text">Com mais de 8 coleções temáticas criadas e obras em coleções privadas por todo o Brasil, continuo a expandir meus limites de sua expressão artística, sempre buscando novas formas de conectar-me com meu público através da arte.</p>
               </div>
             </div>
 
