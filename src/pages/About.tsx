@@ -178,33 +178,21 @@ const About = () => {
             {/* Materiais de Arte */}
             <div className="group cursor-pointer flex justify-center">
               <div className="w-full overflow-hidden rounded-2xl shadow-elegant bg-soft-beige">
-                <img
-                  src="/lovable-uploads/3c77c27d-9ab8-402d-af0c-92914ecf2cd9.png"
-                  alt="Materiais de arte - tintas e pincéis"
-                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
-                />
+                <img src="/lovable-uploads/3c77c27d-9ab8-402d-af0c-92914ecf2cd9.png" alt="Materiais de arte - tintas e pincéis" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" />
               </div>
             </div>
             
             {/* Artista Trabalhando */}
             <div className="group cursor-pointer flex justify-center">
               <div className="w-full overflow-hidden rounded-2xl shadow-elegant bg-soft-beige">
-                <img
-                  src="/lovable-uploads/ce237e42-1e57-4a47-84fb-9b4c8042dd96.png"
-                  alt="Simone Oliveira pintando em seu ateliê"
-                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
-                />
+                <img src="/lovable-uploads/ce237e42-1e57-4a47-84fb-9b4c8042dd96.png" alt="Simone Oliveira pintando em seu ateliê" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" />
               </div>
             </div>
             
             {/* Processo Criativo */}
             <div className="group cursor-pointer flex justify-center">
               <div className="w-full overflow-hidden rounded-2xl shadow-elegant bg-soft-beige flex items-center justify-center">
-                <img
-                  src="/lovable-uploads/46d52c97-6c40-4984-b6b2-229797103846.png"
-                  alt="Processo criativo - aplicação de tinta"
-                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
-                />
+                <img src="/lovable-uploads/46d52c97-6c40-4984-b6b2-229797103846.png" alt="Processo criativo - aplicação de tinta" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" />
               </div>
             </div>
           </div>
@@ -241,10 +229,7 @@ const About = () => {
               </h2>
               
               <div className="space-y-4 font-helvetica text-deep-black/80 leading-relaxed">
-                <p>
-                  Simone Oliveira Art Gallery se posiciona como uma galeria de arte autoral e sensível, 
-                  voltada a um público refinado que valoriza arte contemporânea com alma.
-                </p>
+                <p>Uma galeria de arte autoral e sensível, voltada a um público refinado que valoriza arte contemporânea com alma.</p>
                 <p>
                   Seu foco está em proporcionar uma experiência estética profunda, onde a contemplação, 
                   o silêncio e a emoção são protagonistas.
