@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useArtworkImage } from '../hooks/useArtworks';
+import ProgressiveImage from './ProgressiveImage';
 
 interface LazyArtworkImageProps {
   artworkId: string;
@@ -34,7 +35,13 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
-      {!isInView || isLoading ? (
+      {!isInView ? (
+        <div className="w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
+          <div className="text-deep-black/50 font-helvetica text-sm">
+            Aguardando...
+          </div>
+        </div>
+      ) : isLoading ? (
         <div className="w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
             Carregando...
@@ -47,13 +54,10 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
           </div>
         </div>
       ) : imageUrl ? (
-        <img
+        <ProgressiveImage
           src={imageUrl}
           alt={`${title} - Obra de Arte Contemporânea de Simone Oliveira`}
-          className={`w-full h-auto object-contain transition-opacity duration-500 ${
-            imageLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          loading="lazy"
+          className="w-full h-auto"
           onLoad={() => setImageLoaded(true)}
         />
       ) : (

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import ProgressiveImage from './ProgressiveImage';
 
 interface OptimizedArtworkImageProps {
   imageUrl: string;
@@ -35,36 +36,17 @@ const OptimizedArtworkImage = ({ imageUrl, title, className = "" }: OptimizedArt
       {!isInView ? (
         <div className="w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
-            Carregando...
+            Aguardando...
           </div>
         </div>
       ) : (
-        <>
-          <img
-            src={imageUrl}
-            alt={`${title} - Obra de Arte Contemporânea de Simone Oliveira`}
-            className={`w-full h-auto object-contain transition-all duration-500 ${
-              imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'
-            }`}
-            loading="lazy"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
-          />
-          {!imageLoaded && !imageError && (
-            <div className="absolute inset-0 w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
-              <div className="text-deep-black/50 font-helvetica text-sm">
-                Carregando imagem...
-              </div>
-            </div>
-          )}
-          {imageError && (
-            <div className="absolute inset-0 w-full h-64 bg-gentle-green/10 flex items-center justify-center">
-              <div className="text-deep-black/50 font-helvetica text-sm">
-                Erro ao carregar
-              </div>
-            </div>
-          )}
-        </>
+        <ProgressiveImage
+          src={imageUrl}
+          alt={`${title} - Obra de Arte Contemporânea de Simone Oliveira`}
+          className="w-full h-auto"
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageError(true)}
+        />
       )}
     </div>
   );

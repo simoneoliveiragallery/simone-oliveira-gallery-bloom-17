@@ -57,7 +57,7 @@ export const useArtworksMetadata = (collectionId?: string | null) => {
   });
 };
 
-// Hook para buscar uma obra específica com imagem
+// Hook para buscar uma obra específica com imagem (otimizado com cache)
 export const useArtworkImage = (artworkId: string) => {
   return useQuery({
     queryKey: ['artwork-image', artworkId],
@@ -76,6 +76,10 @@ export const useArtworkImage = (artworkId: string) => {
       return data.image;
     },
     enabled: !!artworkId,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 30 * 60 * 1000, // 30 minutes
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
 

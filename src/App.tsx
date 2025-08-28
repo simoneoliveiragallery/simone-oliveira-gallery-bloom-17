@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +13,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import { initializePersistentCache } from "./utils/imageCache";
 
 const App = () => {
   // Create QueryClient inside component to avoid potential SSR issues
@@ -23,6 +25,11 @@ const App = () => {
       },
     },
   }));
+
+  // Initialize image cache on app start
+  useEffect(() => {
+    initializePersistentCache();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

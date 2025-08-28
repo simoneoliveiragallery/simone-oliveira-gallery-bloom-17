@@ -75,6 +75,29 @@
     -webkit-overflow-scrolling: touch;
     /* Prevent horizontal scroll on mobile */
     overflow-x: hidden;
+    /* Enable hardware acceleration for images */
+    transform: translateZ(0);
+  }
+
+  /* Optimize image rendering */
+  img {
+    /* Enable hardware acceleration */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Improve image quality */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    /* Optimize for quality on high-DPI displays */
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  /* Lazy loading optimization */
+  img[loading="lazy"] {
+    /* Improve lazy loading performance */
+    content-visibility: auto;
+    contain-intrinsic-size: 400px 300px;
   }
 
   h1, h2, h3, h4, h5, h6 {
