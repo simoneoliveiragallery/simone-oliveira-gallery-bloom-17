@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { useArtworkImage } from '../hooks/useArtworks';
 import ProgressiveImage from './ProgressiveImage';
@@ -15,10 +16,16 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
   
   const { data: imageUrl, isLoading, error } = useArtworkImage(isInView ? artworkId : '');
 
+  // Debug logs para identificar o problema
+  useEffect(() => {
+    console.log(`LazyArtworkImage - ID: ${artworkId}, Title: ${title}, ImageURL: ${imageUrl}`);
+  }, [artworkId, title, imageUrl]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          console.log(`Image coming into view - ID: ${artworkId}, Title: ${title}`);
           setIsInView(true);
           observer.disconnect();
         }
@@ -31,7 +38,7 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [artworkId, title]);
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
@@ -44,7 +51,7 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
       ) : isLoading ? (
         <div className="w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
-            Carregando...
+            Carregando... {artworkId.substring(0, 8)}
           </div>
         </div>
       ) : error ? (
