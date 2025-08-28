@@ -30,7 +30,7 @@ const StudioSection = () => {
             <h3 className="font-semplicita text-lg sm:text-xl font-light text-deep-black mb-2">
               Processo Criativo
             </h3>
-            <p className="font-helvetica text-xs sm:text-sm text-deep-black/80 leading-relaxed justified-text text-center">
+            <p className="font-helvetica text-xs sm:text-sm text-deep-black/80 leading-relaxed text-center">
               Cada obra é resultado de um processo meditativo e intuitivo.
             </p>
           </div>
