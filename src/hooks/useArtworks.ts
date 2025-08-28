@@ -57,11 +57,13 @@ export const useArtworksMetadata = (collectionId?: string | null) => {
   });
 };
 
-// Hook para buscar uma obra específica com imagem (otimizado com cache)
+// Hook para buscar uma obra específica com imagem (otimizado com cache individual)
 export const useArtworkImage = (artworkId: string) => {
   return useQuery({
     queryKey: ['artwork-image', artworkId],
     queryFn: async () => {
+      console.log('Fetching image for artwork ID:', artworkId);
+      
       const { data, error } = await supabase
         .from('artworks')
         .select('image')
@@ -73,13 +75,17 @@ export const useArtworkImage = (artworkId: string) => {
         throw error;
       }
       
+      console.log(`Fetched image for ${artworkId}:`, data.image ? 'Success' : 'No image');
       return data.image;
     },
     enabled: !!artworkId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 30 * 60 * 1000, // 30 minutes
+    staleTime: 10 * 60 * 1000, // 10 minutes
+    gcTime: 60 * 60 * 1000, // 1 hour
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    // Garantir que cada obra tenha sua própria entrada no cache
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 };
 
@@ -125,6 +131,7 @@ export const useArtworks = (collectionId?: string | null) => {
         throw error;
       }
       
+      console.log('Fetched full artworks - Total:', data?.length);
       return data as Artwork[];
     },
   });

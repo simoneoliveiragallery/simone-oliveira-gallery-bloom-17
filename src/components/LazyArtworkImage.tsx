@@ -16,12 +16,18 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
   
   const { data: imageUrl, isLoading, error } = useArtworkImage(isInView ? artworkId : '');
 
+  // Debug para verificar se a imagem correta está sendo carregada
+  useEffect(() => {
+    if (imageUrl) {
+      console.log(`Artwork ${artworkId} (${title}) - Image loaded:`, imageUrl.substring(0, 50) + '...');
+    }
+  }, [imageUrl, artworkId, title]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          
+          console.log(`Loading image for: ${title} (ID: ${artworkId.substring(0, 8)})`);
           setIsInView(true);
           observer.disconnect();
         }
@@ -47,13 +53,13 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
       ) : isLoading ? (
         <div className="w-full h-64 bg-gentle-green/10 animate-pulse flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
-            Carregando... {artworkId.substring(0, 8)}
+            Carregando {title.substring(0, 15)}...
           </div>
         </div>
       ) : error ? (
         <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
-            Erro ao carregar
+            Erro ao carregar {title}
           </div>
         </div>
       ) : imageUrl ? (
@@ -61,12 +67,16 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
           src={imageUrl}
           alt={`${title} - Obra de Arte Contemporânea de Simone Oliveira`}
           className="w-full h-auto"
-          onLoad={() => setImageLoaded(true)}
+          onLoad={() => {
+            setImageLoaded(true);
+            console.log(`Image loaded successfully for: ${title}`);
+          }}
+          key={`${artworkId}-${imageUrl.substring(0, 20)}`}
         />
       ) : (
         <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
           <div className="text-deep-black/50 font-helvetica text-sm">
-            Imagem não encontrada
+            Imagem não encontrada para {title}
           </div>
         </div>
       )}

@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import { useArtworksMetadata, useFeaturedArtworksMetadata, useArtwork, ArtworkMetadata } from '../hooks/useArtworks';
 import { useIsMobile } from '../hooks/use-mobile';
 import ArtworkModal from './ArtworkModal';
 import LazyArtworkImage from './LazyArtworkImage';
+import ArtworkImageDebug from './ArtworkImageDebug';
 
 interface ArtworkGridProps {
   collectionId?: string | null;
@@ -54,10 +54,11 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
 
   return (
     <>
+      <ArtworkImageDebug />
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 justify-items-center">
         {artworks.map((artwork, index) => (
           <div
-            key={artwork.id}
+            key={`artwork-${artwork.id}-${index}`}
             className="group cursor-pointer stagger-animation hover-lift-elegant"
             style={{
               animationDelay: `${index * 0.1}s`
