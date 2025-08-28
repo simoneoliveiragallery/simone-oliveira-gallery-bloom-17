@@ -18,7 +18,7 @@ const AboutSection = () => {
 
             <p className="font-helvetica text-sm sm:text-base text-deep-black/80 leading-relaxed mb-3 sm:mb-4 font-light justified-text">
               Simone é uma <strong>artista plástica brasileira</strong> em 
-              <strong>arte contemporânea</strong> de <strong>obras abstratas únicas</strong> que exploram as profundezas da dedicação a arte, não à pintura.
+              <strong>arte contemporânea</strong> de <strong>obras abstratas únicas</strong> que exploram as profundezas.
             </p>
 
             <p className="font-helvetica text-sm sm:text-base text-deep-black/80 leading-relaxed mb-6 sm:mb-8 font-light justified-text">
