@@ -2,7 +2,7 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import FloatingContactButtons from '../components/FloatingContactButtons';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { BsWhatsapp } from "react-icons/bs";
 
 const Contact = () => {
@@ -44,21 +44,6 @@ const Contact = () => {
                 </h2>
                 
                 <div className="space-y-6">
-                  {/* Address */}
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-warm-terracotta/10 rounded-xl flex items-center justify-center">
-                      <MapPin size={20} className="text-warm-terracotta" />
-                    </div>
-                    <div>
-                      <h3 className="font-helvetica font-semibold text-deep-black mb-2">Endereço</h3>
-                      <p className="font-helvetica text-deep-black/70 leading-relaxed">
-                        Rua Elias Alves da Cunha, 73<br />
-                        Bairro São Lucas<br />
-                        Patrocínio - MG<br />
-                        CEP: 38747-506
-                      </p>
-                    </div>
-                  </div>
 
                   {/* WhatsApp */}
                   <div className="flex items-start space-x-4">
@@ -76,7 +61,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  {/* Email */}
+                  {/* E-mail */}
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-warm-terracotta/10 rounded-xl flex items-center justify-center">
                       <Mail size={20} className="text-warm-terracotta" />
@@ -89,20 +74,6 @@ const Contact = () => {
                       >
                         gallery@simoneoliveiragallery.com
                       </button>
-                    </div>
-                  </div>
-
-                  {/* Hours */}
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-gentle-green/20 rounded-xl flex items-center justify-center">
-                      <Clock size={20} className="text-warm-terracotta" />
-                    </div>
-                    <div>
-                      <h3 className="font-helvetica font-semibold text-deep-black mb-2">Horário de Funcionamento</h3>
-                      <p className="font-helvetica text-deep-black/70">
-                        Visitação mediante agendamento<br />
-                        <span className="text-sm">Entre em contato para agendar sua visita</span>
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -133,19 +104,33 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Map */}
-            <div className="h-96 lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-elegant">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.8631987654!2d-46.9942235!3d-18.9354321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c08b49a0b4c8d9%3A0x8a8b8c0d1e2f3a4b!2sRua%20Elias%20Alves%20da%20Cunha%2C%2073%20-%20S%C3%A3o%20Lucas%2C%20Patroc%C3%ADnio%20-%20MG%2C%2038747-506!5e0!3m2!1spt!2sbr!4v1649876543210!5m2!1spt!2sbr"
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Localização da Simone Oliveira Art Gallery"
-                className="filter grayscale hover:grayscale-0 transition-all duration-500"
-              />
+            {/* Art Gallery */}
+            <div className="h-96 lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-elegant bg-gradient-to-br from-warm-terracotta/10 to-gentle-green/10 flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="w-24 h-24 bg-warm-terracotta/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail size={40} className="text-warm-terracotta" />
+                </div>
+                <h3 className="font-semplicita text-2xl text-deep-black mb-4">Entre em Contato</h3>
+                <p className="font-helvetica text-deep-black/70 text-sm mb-6 max-w-sm">
+                  Use nossos canais de comunicação para descobrir mais sobre as obras de Simone Oliveira
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    onClick={handleWhatsApp}
+                    className="flex items-center justify-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-helvetica text-sm font-medium transition-all duration-300 group"
+                  >
+                    <BsWhatsapp size={16} className="mr-2" />
+                    WhatsApp
+                  </button>
+                  <button
+                    onClick={handleEmail}
+                    className="flex items-center justify-center px-4 py-2 bg-warm-terracotta hover:bg-warm-terracotta/90 text-soft-beige rounded-lg font-helvetica text-sm font-medium transition-all duration-300 group"
+                  >
+                    <Mail size={16} className="mr-2" />
+                    E-mail
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

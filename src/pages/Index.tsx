@@ -59,11 +59,6 @@ const Index = () => {
             "description": "Galeria de arte contemporânea brasileira especializada em obras abstratas e pinturas exclusivas da artista plástica Simone Oliveira",
             "url": "https://simone-oliveira-art.lovable.app",
             "image": "/lovable-uploads/LOGO-SIMONE-OLIVEIRA-ART.png",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "BR",
-              "addressRegion": "São Paulo"
-            },
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
               "name": "Arte Contemporânea",
