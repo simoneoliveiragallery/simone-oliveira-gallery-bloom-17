@@ -191,8 +191,8 @@ const About = () => {
             
             {/* Processo Criativo */}
             <div className="group cursor-pointer flex justify-center">
-              <div className="w-full overflow-hidden rounded-2xl shadow-elegant bg-soft-beige">
-                <img src="/lovable-uploads/46d52c97-6c40-4984-b6b2-229797103846.png" alt="Processo criativo - aplicação de tinta" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" />
+              <div className="w-full aspect-square overflow-hidden rounded-2xl shadow-elegant bg-soft-beige flex items-center justify-center">
+                <img src="/lovable-uploads/46d52c97-6c40-4984-b6b2-229797103846.png" alt="Processo criativo - aplicação de tinta" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
             </div>
           </div>
