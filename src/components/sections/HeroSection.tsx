@@ -56,7 +56,7 @@ const HeroSection = ({
           }}>
                 <stat.icon size={14} className="mx-auto mb-1 sm:mb-2 text-warm-terracotta sm:w-4 sm:h-4" />
                 <div className="font-semplicita text-sm sm:text-lg font-light text-deep-black">{stat.value}</div>
-                <div className="font-helvetica text-xs text-deep-black/70">{stat.label}</div>
+                <div className="font-helvetica text-xs text-deep-black/70 text-center break-words">{stat.label}</div>
               </div>)}
           </div>
         </div>
