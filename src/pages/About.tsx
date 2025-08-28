@@ -129,7 +129,7 @@ const About = () => {
                   {feature.title}
                 </h3>
                 <p className="font-helvetica text-deep-black/70 leading-relaxed text-sm">
-                  {feature.description}
+                  Promover a apreciação da arte e tornar obras acessíveis ao público em um espaço de inspiração e cultura.
                 </p>
               </div>)}
           </div>
