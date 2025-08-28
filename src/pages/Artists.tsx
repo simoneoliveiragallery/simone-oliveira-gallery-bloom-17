@@ -1,4 +1,3 @@
-
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ArrowRight } from 'lucide-react';
@@ -6,40 +5,32 @@ import { Link } from 'react-router-dom';
 const Artists = () => {
   return <div className="min-h-screen bg-soft-beige">
     {/* Dados Estruturados Schema.org para Pessoa */}
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Simone Oliveira",
-          "jobTitle": "Artista Visual",
-          "description": "Artista plástica brasileira especializada em arte contemporânea, com mais de 20 anos de carreira e 50+ obras criadas",
-          "url": "https://simone-oliveira-art.lovable.app/artists",
-          "image": "/lovable-uploads/1730db82-b48a-4890-a40a-92dcfb123144.png",
-          "birthPlace": {
-            "@type": "Place",
-            "name": "São Paulo, Brasil"
-          },
-          "alumniOf": {
-            "@type": "Organization",
-            "name": "Universidade de São Paulo",
-            "department": "Artes Visuais"
-          },
-          "hasOccupation": {
-            "@type": "Occupation",
-            "name": "Artista Visual",
-            "occupationalCategory": "Arte Contemporânea"
-          },
-          "knowsAbout": [
-            "Arte Contemporânea",
-            "Pintura Abstrata",
-            "Técnicas Mistas",
-            "Arte Brasileira"
-          ]
-        })
-      }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Simone Oliveira",
+        "jobTitle": "Artista Visual",
+        "description": "Artista plástica brasileira especializada em arte contemporânea, com mais de 20 anos de carreira e 50+ obras criadas",
+        "url": "https://simone-oliveira-art.lovable.app/artists",
+        "image": "/lovable-uploads/1730db82-b48a-4890-a40a-92dcfb123144.png",
+        "birthPlace": {
+          "@type": "Place",
+          "name": "São Paulo, Brasil"
+        },
+        "alumniOf": {
+          "@type": "Organization",
+          "name": "Universidade de São Paulo",
+          "department": "Artes Visuais"
+        },
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Artista Visual",
+          "occupationalCategory": "Arte Contemporânea"
+        },
+        "knowsAbout": ["Arte Contemporânea", "Pintura Abstrata", "Técnicas Mistas", "Arte Brasileira"]
+      })
+    }} />
     <Navigation />
 
     {/* Header */}
@@ -48,10 +39,7 @@ const Artists = () => {
         <h1 className="font-semplicita text-5xl md:text-6xl font-light text-deep-black mb-6 fade-in">
           Sobre Simone Oliveira
         </h1>
-        <p className="font-helvetica text-xl text-deep-black/80 max-w-3xl mx-auto leading-relaxed slide-up justified-text text-center">
-          Conheça a trajetória, inspirações e processo criativo de uma das mais talentosas
-          artistas do cenário nacional, cujas obras tocam a alma e despertam emoções profundas.
-        </p>
+        <p className="font-helvetica text-xl text-deep-black/80 max-w-3xl mx-auto leading-relaxed slide-up justified-text text-center">Conheça a trajetória, inspirações e processo criativo de artistas do cenário nacional, cujas obras tocam a alma e despertam.</p>
       </div>
     </section>
 
@@ -74,23 +62,11 @@ const Artists = () => {
               </p>
 
               <div className="space-y-4 text-deep-black/80 leading-relaxed">
-                <p className="font-helvetica justified-text">
-                  Nascida em São Paulo, Simone Oliveira desenvolveu sua paixão pela arte desde muito jovem.
-                  Formada em Artes Visuais pela Universidade de São Paulo, dedicou sua carreira à exploração
-                  de técnicas mistas que combinam tradição e inovação contemporânea.
-                </p>
+                <p className="font-helvetica justified-text">Nascida em Minas Gerais, Simone Oliveira desenvolveu sua paixão pela arte desde muito jovem. Especialização em Artes Visuais pela Universidade de São Paulo, dedicou à exploração de técnicas mistas que combinam tradição e inovação contemporânea.</p>
 
-                <p className="font-helvetica justified-text">
-                  Suas obras refletem uma profunda conexão com questões humanas universais, explorando temas como
-                  emoção, identidade e transformação pessoal através de uma linguagem visual única que
-                  mescla cores vibrantes com formas expressivas e texturas envolventes.
-                </p>
+                <p className="font-helvetica justified-text">Suas obras refletem uma conexão, explorando emoção, identidade e transformação pessoal através de uma linguagem visual única que mescla cores vibrantes com formas expressivas e texturas envolventes.</p>
 
-                <p className="font-helvetica justified-text">
-                  Com mais de 8 coleções temáticas criadas e obras em coleções privadas por todo o Brasil,
-                  Simone continua a expandir os limites de sua expressão artística, sempre buscando novas
-                  formas de conectar-se profundamente com seu público através da arte.
-                </p>
+                <p className="font-helvetica justified-text">Com mais de 8 coleções temáticas criadas e obras em coleções privadas por todo o Brasil, Simone continua a expandir os limites de sua expressão artística, sempre buscando novas formas de conectar-se com seu público através da arte.</p>
               </div>
             </div>
 
@@ -124,7 +100,7 @@ const Artists = () => {
           <h2 className="font-semplicita text-4xl font-light text-deep-black mb-6">
             Processo Criativo
           </h2>
-          <p className="font-helvetica text-lg text-deep-black/80 max-w-2xl mx-auto justified-text text-center">O processo criativo da artista plástica Simone Oliveira é fundamentado em três pilares essenciais que orientam cada obra, a união desses pilares confere às suas criações uma identidade única, sensível e profundamente conectada com o observador.</p>
+          <p className="font-helvetica text-lg text-deep-black/80 max-w-2xl mx-auto justified-text text-center">O processo criativo da artista plástica Simone Oliveira é fundamentado em três pilares essenciais que orientam cada obra, a união desses pilares confere às suas criações uma identidade única, sensível e conectada com o observador.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
