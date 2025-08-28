@@ -19,15 +19,15 @@ const HeroSection = ({
   const isMobile = useIsMobile();
   const stats = [{
     icon: Eye,
-    label: 'Obras Criadas',
+    label: 'Obras',
     value: '+50'
   }, {
     icon: Users,
-    label: 'Colecionadores',
+    label: 'Clientes',
     value: '+25'
   }, {
     icon: Sparkles,
-    label: 'Anos de Carreira',
+    label: 'Anos',
     value: '+20'
   }];
   return <section className="relative pt-16 sm:pt-20 pb-12 sm:pb-16 md:pb-24 lg:pb-32 gradient-elegant">
