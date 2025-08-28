@@ -50,9 +50,9 @@ const HeroSection = ({ isLoaded, mousePosition, logoVisible }: HeroSectionProps)
           </h1>
           
           <p className="font-helvetica text-sm sm:text-base md:text-lg text-deep-black/80 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed font-light text-center px-2">
-            Explore obras abstratas únicas, pinturas exclusivas e
+            Obras, pinturas exclusivas e
             <span className="text-warm-terracotta font-medium"> arte moderna brasileira </span>
-            da talentosa artista plástica Simone Oliveira.
+            da artista plástica Simone Oliveira.
           </p>
 
           {/* Compact Stats */}
