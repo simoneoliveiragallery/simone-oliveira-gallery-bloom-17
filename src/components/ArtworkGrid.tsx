@@ -20,6 +20,9 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
   const artworks = featuredOnly ? featuredArtworks : allArtworks;
   const isLoading = featuredOnly ? featuredLoading : allLoading;
   const error = featuredOnly ? featuredError : allError;
+  
+  // Log para debug
+  console.log(`ArtworkGrid - Mode: ${featuredOnly ? 'Featured' : 'All'}, Total artworks: ${artworks?.length || 0}`);
 
   if (isLoading) {
     return (

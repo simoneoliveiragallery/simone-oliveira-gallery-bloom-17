@@ -51,7 +51,7 @@ export const useArtworksMetadata = (collectionId?: string | null) => {
         throw error;
       }
       
-      console.log('Fetched artworks metadata:', data?.map(a => ({ id: a.id, title: a.title })));
+      console.log('Fetched artworks metadata - Total:', data?.length, 'Items:', data?.map(a => ({ id: a.id, title: a.title })));
       return data as ArtworkMetadata[];
     },
   });
@@ -62,8 +62,6 @@ export const useArtworkImage = (artworkId: string) => {
   return useQuery({
     queryKey: ['artwork-image', artworkId],
     queryFn: async () => {
-      console.log('Fetching image for artwork ID:', artworkId);
-      
       const { data, error } = await supabase
         .from('artworks')
         .select('image')
@@ -75,7 +73,6 @@ export const useArtworkImage = (artworkId: string) => {
         throw error;
       }
       
-      console.log('Fetched image for artwork:', artworkId, 'Image URL:', data.image);
       return data.image;
     },
     enabled: !!artworkId,

@@ -16,16 +16,12 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
   
   const { data: imageUrl, isLoading, error } = useArtworkImage(isInView ? artworkId : '');
 
-  // Debug logs para identificar o problema
-  useEffect(() => {
-    console.log(`LazyArtworkImage - ID: ${artworkId}, Title: ${title}, ImageURL: ${imageUrl}`);
-  }, [artworkId, title, imageUrl]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          console.log(`Image coming into view - ID: ${artworkId}, Title: ${title}`);
+          
           setIsInView(true);
           observer.disconnect();
         }
