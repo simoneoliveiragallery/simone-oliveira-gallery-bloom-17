@@ -1,32 +1,124 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simone Oliveira Art Gallery - Arte Contemporânea Brasileira | Comprar Quadros Abstratos</title>
-  <link rel="icon" href="/lovable-uploads/LOGO-SIMONE-OLIVEIRA-ART.png" type="image/png">
-  <meta name="description" content="Galeria de arte contemporânea brasileira de Simone Oliveira. Explore obras abstratas únicas, pinturas exclusivas e arte moderna. Compre quadros originais de artista plástica emergente." />
-  <meta name="keywords" content="arte contemporânea brasileira, artista plástica Simone Oliveira, galeria de arte online, comprar quadros abstratos, arte moderna, pinturas exclusivas, obras originais" />
-  <meta name="author" content="Simone Oliveira Art Gallery" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Simone Oliveira Art Gallery - Arte Contemporânea Brasileira" />
-  <meta property="og:description" content="Descubra a arte contemporânea de Simone Oliveira. Galeria online com obras abstratas únicas, pinturas exclusivas e arte moderna brasileira." />
-  <meta property="og:image" content="/lovable-uploads/LOGO-SIMONE-OLIVEIRA-ART.png" />
-  <meta property="og:url" content="https://simone-oliveira-art.lovable.app/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Título curto e com geo (<=65c) -->
+  <title>Simone Oliveira Art Gallery – Arte Contemporânea em Minas Gerais</title>
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href="https://simoneoliveiragallery.com/" />
+  <link rel="alternate" href="https://simoneoliveiragallery.com/" hreflang="pt-BR" />
+
+  <!-- Meta description (150–160c, com termos que as pessoas realmente buscam) -->
+  <meta name="description" content="Galeria online da artista mineira Simone Oliveira. Pinturas abstratas originais, arte contemporânea brasileira e obras exclusivas produzidas em Minas Gerais." />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- Favicons / manifest -->
+  <link rel="icon" href="/favicons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#101010" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Simone Oliveira Art Gallery" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Simone Oliveira Art Gallery - Arte Contemporânea Brasileira" />
-  <meta name="twitter:description" content="Explore obras abstratas únicas e pinturas exclusivas da artista plástica Simone Oliveira. Arte contemporânea brasileira de qualidade." />
-  <meta name="twitter:image" content="/lovable-uploads/LOGO-SIMONE-OLIVEIRA-ART.png" />
-  <meta name="twitter:site" content="@simone_oliveira_art" />
+  <meta property="og:title" content="Simone Oliveira Art Gallery – Arte Contemporânea Brasileira" />
+  <meta property="og:description" content="Explore pinturas abstratas originais e arte contemporânea da artista mineira Simone Oliveira." />
+  <meta property="og:url" content="https://simoneoliveiragallery.com/" />
+  <!-- TODO: troque pelo caminho real do seu 1200x630 -->
+  <meta property="og:image" content="https://simoneoliveiragallery.com/assets/og/simone-oliveira-gallery-1200x630.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Simone Oliveira Art Gallery – Arte Contemporânea Brasileira" />
+  <meta name="twitter:description" content="Pinturas abstratas e obras contemporâneas por Simone Oliveira." />
+  <!-- TODO: troque pelo mesmo OG image ou um quadrado 1200x1200 -->
+  <meta name="twitter:image" content="https://simoneoliveiragallery.com/assets/og/simone-oliveira-gallery-1200x630.jpg" />
+
+  <!-- Preconnect / Preload (ajuste domínios/arquivos reais) -->
+  <!-- TODO: se servir arquivos de CDN, adicione o domínio aqui -->
+  <!-- <link rel="preconnect" href="https://cdn.seus-arquivos.com" crossorigin> -->
+  <!-- TODO: troque pela imagem LCP (a maior do hero) -->
+  <link rel="preload" as="image" href="/assets/hero/hero-lcp.jpg" imagesrcset="/assets/hero/hero-lcp@2x.jpg 2x" />
+  <!-- TODO: troque pelos nomes das suas fontes -->
+  <link rel="preload" as="font" href="/assets/fonts/Inter-Variable.woff2" type="font/woff2" crossorigin>
+
+  <!-- CSS/JS da SPA -->
+  <link rel="stylesheet" crossorigin href="/assets/index-DKlPKo3e.css">
+  <script type="module" crossorigin src="/assets/index-DhXPmOIo.js"></script>
+
+  <!-- Structured Data: ArtGallery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ArtGallery",
+    "name": "Simone Oliveira Art Gallery",
+    "url": "https://simoneoliveiragallery.com/",
+    "logo": "https://simoneoliveiragallery.com/favicons/apple-touch-icon.png",
+    "image": "https://simoneoliveiragallery.com/assets/og/simone-oliveira-gallery-1200x630.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "MG",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/SEU_USUARIO", 
+      "https://www.facebook.com/SEU_USUARIO"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebSite + SearchAction (ganhar sitelinks de busca) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "url":"https://simoneoliveiragallery.com/",
+    "name":"Simone Oliveira Art Gallery",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://simoneoliveiragallery.com/busca?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Segurança (opcional: ajuste domínios antes de usar) -->
+  <!--
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' https: data:; font-src 'self' https: data:;
+                 script-src 'self' https: 'unsafe-inline'; style-src 'self' https: 'unsafe-inline'">
+  -->
 </head>
 
 <body>
+  <!-- Acessibilidade -->
+  <a class="skip-link" href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    Pular para o conteúdo
+  </a>
+
+  <!-- O app React deve renderizar <header>, <main id="main"> e <footer> -->
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
-</body>
 
+  <!-- Fallback sem JS -->
+  <noscript>
+    <style>
+      .nojs { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; padding: 24px; max-width: 720px; margin: 0 auto; }
+      .nojs a { text-decoration: underline; }
+    </style>
+    <div class="nojs">
+      <h1>Simone Oliveira Art Gallery</h1>
+      <p>Para explorar as obras de Simone Oliveira, ative o JavaScript ou acesse nosso catálogo estático.</p>
+      <p><a href="/catalogo">Abrir catálogo</a></p>
+    </div>
+  </noscript>
+</body>
 </html>
