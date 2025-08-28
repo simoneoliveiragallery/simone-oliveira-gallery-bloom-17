@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { useEffect } from 'react';
 
 export interface Artwork {
   id: string;
@@ -30,8 +31,35 @@ export interface ArtworkMetadata {
   updated_at: string;
 }
 
-// Hook para buscar metadados das obras (sem imagens)
+// Hook para buscar metadados das obras (sem imagens) com real-time updates
 export const useArtworksMetadata = (collectionId?: string | null) => {
+  const queryClient = useQueryClient();
+
+  // Setup real-time listener para mudanças nas obras
+  useEffect(() => {
+    const channel = supabase
+      .channel('artworks-metadata-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // Escutar INSERT, UPDATE, DELETE
+          schema: 'public',
+          table: 'artworks'
+        },
+        (payload) => {
+          console.log('Real-time artworks change:', payload);
+          // Invalidar todas as queries de artworks para garantir sincronização
+          queryClient.invalidateQueries({ queryKey: ['artworks-metadata'] });
+          queryClient.invalidateQueries({ queryKey: ['artworks'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
+
   return useQuery({
     queryKey: ['artworks-metadata', collectionId],
     queryFn: async () => {
@@ -51,22 +79,56 @@ export const useArtworksMetadata = (collectionId?: string | null) => {
         throw error;
       }
       
-      console.log('Fetched artworks metadata - Total:', data?.length, 'Items:', data?.map(a => ({ id: a.id, title: a.title })));
+      console.log('Fetched artworks metadata - Total:', data?.length);
       return data as ArtworkMetadata[];
     },
+    staleTime: 2 * 60 * 1000, // 2 minutes
+    refetchOnWindowFocus: true,
   });
 };
 
 // Hook para buscar uma obra específica com imagem (otimizado com cache individual)
 export const useArtworkImage = (artworkId: string) => {
+  const queryClient = useQueryClient();
+
+  // Setup real-time listener para esta obra específica
+  useEffect(() => {
+    if (!artworkId) return;
+
+    const channel = supabase
+      .channel(`artwork-${artworkId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'artworks',
+          filter: `id=eq.${artworkId}`
+        },
+        (payload) => {
+          console.log(`Real-time update for artwork ${artworkId}:`, payload.new);
+          // Invalidar cache desta obra específica
+          queryClient.invalidateQueries({ queryKey: ['artwork-image', artworkId] });
+          queryClient.invalidateQueries({ queryKey: ['artwork', artworkId] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [artworkId, queryClient]);
+
   return useQuery({
     queryKey: ['artwork-image', artworkId],
     queryFn: async () => {
+      if (!artworkId) return null;
+      
       console.log('Fetching image for artwork ID:', artworkId);
       
       const { data, error } = await supabase
         .from('artworks')
-        .select('image')
+        .select('image, title')
         .eq('id', artworkId)
         .single();
       
@@ -75,17 +137,16 @@ export const useArtworkImage = (artworkId: string) => {
         throw error;
       }
       
-      console.log(`Fetched image for ${artworkId}:`, data.image ? 'Success' : 'No image');
+      console.log(`Fetched image for ${data.title} (${artworkId}):`, data.image ? 'Success' : 'No image');
       return data.image;
     },
     enabled: !!artworkId,
-    staleTime: 10 * 60 * 1000, // 10 minutes
-    gcTime: 60 * 60 * 1000, // 1 hour
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 30 * 60 * 1000, // 30 minutes
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    // Garantir que cada obra tenha sua própria entrada no cache
-    retry: 3,
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
@@ -112,6 +173,31 @@ export const useArtwork = (artworkId: string) => {
 };
 
 export const useArtworks = (collectionId?: string | null) => {
+  const queryClient = useQueryClient();
+
+  // Setup real-time listener 
+  useEffect(() => {
+    const channel = supabase
+      .channel('artworks-full-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public', 
+          table: 'artworks'
+        },
+        (payload) => {
+          console.log('Real-time artworks full change:', payload);
+          queryClient.invalidateQueries({ queryKey: ['artworks'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
+
   return useQuery({
     queryKey: ['artworks', collectionId],
     queryFn: async () => {
@@ -134,6 +220,8 @@ export const useArtworks = (collectionId?: string | null) => {
       console.log('Fetched full artworks - Total:', data?.length);
       return data as Artwork[];
     },
+    staleTime: 2 * 60 * 1000,
+    refetchOnWindowFocus: true,
   });
 };
 

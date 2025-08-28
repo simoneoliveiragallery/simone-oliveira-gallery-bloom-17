@@ -19,7 +19,7 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
   // Debug para verificar se a imagem correta está sendo carregada
   useEffect(() => {
     if (imageUrl) {
-      console.log(`Artwork ${artworkId} (${title}) - Image loaded:`, imageUrl.substring(0, 50) + '...');
+      console.log(`✅ Artwork "${title}" (ID: ${artworkId.substring(0, 8)}) - Image loaded successfully`);
     }
   }, [imageUrl, artworkId, title]);
 
@@ -69,9 +69,9 @@ const LazyArtworkImage = ({ artworkId, title, className = "" }: LazyArtworkImage
           className="w-full h-auto"
           onLoad={() => {
             setImageLoaded(true);
-            console.log(`Image loaded successfully for: ${title}`);
+            console.log(`🖼️  Image rendered successfully: "${title}"`);
           }}
-          key={`${artworkId}-${imageUrl.substring(0, 20)}`}
+          key={`artwork-${artworkId}-${Date.now()}`}
         />
       ) : (
         <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
