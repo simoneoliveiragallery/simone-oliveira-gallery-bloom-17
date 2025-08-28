@@ -22,9 +22,9 @@ const AboutSection = () => {
             </p>
 
             <p className="font-helvetica text-sm sm:text-base text-deep-black/80 leading-relaxed mb-6 sm:mb-8 font-light justified-text">
-              Com mais de 20 anos de dedicação à <strong>pintura contemporânea</strong>, Simone desenvolveu um estilo próprio que
+              Com mais de 20 anos de dedicação a <strong>arte contemporânea</strong>, um estilo próprio que
               combina técnicas tradicionais com elementos modernos, criando <strong>quadros exclusivos</strong> 
-              que encantam colecionadores e apreciadores de <strong>arte moderna brasileira</strong>.
+              que encantam apreciadores de <strong>arte moderna brasileira</strong>.
             </p>
 
             <Link
