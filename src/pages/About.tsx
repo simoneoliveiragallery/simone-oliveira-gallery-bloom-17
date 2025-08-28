@@ -224,7 +224,7 @@ const About = () => {
               <h2 className="font-semplicita text-3xl lg:text-4xl font-light text-deep-black mb-6">Direção da Arte</h2>
               
               <div className="space-y-4 font-helvetica text-deep-black/80 leading-relaxed">
-                <p>A direção de arte da Simone Oliveira Art Gallery nasce da busca por uma experiência visual que seja tão sensível quanto a própria criação artística.</p>
+                <p>Nasce da busca por uma experiência visual que seja tão sensível quanto a própria criação artística.</p>
                 <p>Cada pintura é pensada para respirar: o espaço, o ritmo, o silêncio. A composição é leve, contemplativa, e convida o visitante a desacelerar o olhar, a entrar em contato com o tempo interno da obra e com sua própria percepção.</p>
                 
               </div>
