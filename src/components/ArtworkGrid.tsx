@@ -3,7 +3,7 @@ import { useArtworks, Artwork } from '../hooks/useArtworks';
 import { useIsMobile } from '../hooks/use-mobile';
 import ArtworkModal from './ArtworkModal';
 import ArtworkSkeleton from './ArtworkSkeleton';
-import OptimizedArtworkImage from './OptimizedArtworkImage';
+import SimpleArtworkImage from './SimpleArtworkImage';
 
 interface ArtworkGridProps {
   collectionId?: string | null;
@@ -73,7 +73,7 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
           >
             <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige transition-all duration-300 hover:shadow-lg hover:scale-105">
               {artwork.image ? (
-                <OptimizedArtworkImage
+                <SimpleArtworkImage
                   src={artwork.image}
                   alt={`${artwork.title} - ${artwork.artist} (${artwork.year})`}
                   className="transition-transform duration-700 group-hover:scale-110 pointer-events-none"

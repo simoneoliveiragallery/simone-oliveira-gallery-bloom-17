@@ -35,6 +35,8 @@ export const useArtworks = (collectionId?: string | null) => {
   return useQuery({
     queryKey: ['artworks', collectionId],
     queryFn: async () => {
+      console.log('🔄 Fetching artworks from database...', { collectionId });
+      
       let query = supabase
         .from('artworks')
         .select('*')
@@ -47,7 +49,7 @@ export const useArtworks = (collectionId?: string | null) => {
       const { data, error } = await query;
       
       if (error) {
-        console.error('Error fetching artworks:', error);
+        console.error('❌ Error fetching artworks:', error);
         throw error;
       }
       
@@ -56,9 +58,11 @@ export const useArtworks = (collectionId?: string | null) => {
       return data as Artwork[];
     },
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 10, // 10 minutes
-    retry: 2,
-    retryDelay: 1000,
+    staleTime: 1000 * 60 * 30, // 30 minutes
+    gcTime: 1000 * 60 * 60, // 1 hour
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    networkMode: 'online',
   });
 };
 
