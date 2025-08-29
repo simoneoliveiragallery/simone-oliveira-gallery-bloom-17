@@ -66,7 +66,10 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
             style={{
               animationDelay: `${index * 0.05}s`
             }}
-            onClick={() => setSelectedArtwork(artwork)}
+            onClick={() => {
+              console.log('🖱️ Clicked artwork:', artwork.title, artwork);
+              setSelectedArtwork(artwork);
+            }}
           >
             <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige transition-shadow duration-300 hover:shadow-lg">
               {artwork.image ? (

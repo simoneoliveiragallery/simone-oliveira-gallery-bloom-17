@@ -10,6 +10,8 @@ interface ArtworkModalProps {
 }
 
 const ArtworkModal = ({ artwork, onClose }: ArtworkModalProps) => {
+  console.log('🖼️ ArtworkModal render:', { artwork: artwork?.title, hasArtwork: !!artwork });
+  
   if (!artwork) return null;
 
   const whatsappNumber = "5534991101000";
