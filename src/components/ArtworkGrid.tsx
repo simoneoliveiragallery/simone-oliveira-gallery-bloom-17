@@ -62,12 +62,19 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
         {artworks?.map((artwork, index) => (
           <div
             key={artwork.id}
-            className="group cursor-pointer hover-scale animate-fade-in"
+            className="group cursor-pointer hover-scale animate-fade-in relative z-10"
             style={{
               animationDelay: `${index * 0.05}s`
             }}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
               console.log('🖱️ Clicked artwork:', artwork.title, artwork);
+              setSelectedArtwork(artwork);
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              console.log('📱 Touch artwork:', artwork.title);
               setSelectedArtwork(artwork);
             }}
           >
