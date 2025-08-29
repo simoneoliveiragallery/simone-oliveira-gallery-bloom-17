@@ -62,28 +62,21 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
         {artworks?.map((artwork, index) => (
           <div
             key={artwork.id}
-            className="group cursor-pointer hover-scale animate-fade-in relative z-10"
+            className="group cursor-pointer animate-fade-in"
             style={{
               animationDelay: `${index * 0.05}s`
             }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+            onClick={() => {
               console.log('🖱️ Clicked artwork:', artwork.title, artwork);
               setSelectedArtwork(artwork);
             }}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              console.log('📱 Touch artwork:', artwork.title);
-              setSelectedArtwork(artwork);
-            }}
           >
-            <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige transition-shadow duration-300 hover:shadow-lg">
+            <div className="relative overflow-hidden rounded-2xl shadow-elegant bg-soft-beige transition-all duration-300 hover:shadow-lg hover:scale-105">
               {artwork.image ? (
                 <OptimizedArtworkImage
                   src={artwork.image}
                   alt={`${artwork.title} - ${artwork.artist} (${artwork.year})`}
-                  className="transition-transform duration-700 group-hover:scale-110"
+                  className="transition-transform duration-700 group-hover:scale-110 pointer-events-none"
                 />
               ) : (
                 <div className="w-full h-64 bg-gentle-green/10 flex items-center justify-center">
@@ -92,7 +85,7 @@ const ArtworkGrid = ({ collectionId, featuredOnly = false }: ArtworkGridProps) =
                   </span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-deep-black/80 via-deep-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-deep-black/80 via-deep-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 className="font-semplicita text-lg sm:text-xl text-soft-beige mb-2 font-light">
                     {artwork.title}
